@@ -43,5 +43,10 @@
     "name": ["violin_combo"],
     "title": ["Combo Plots"],
     "image": ["violin_combo.png"]
+  },
+  {
+    "name": ["wages_model"],
+    "title": ["Wages Model"],
+    "image": ["wages_model.png"]
   }
 ]
