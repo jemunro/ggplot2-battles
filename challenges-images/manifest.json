@@ -20,6 +20,11 @@
     "image": ["circle_plot.png"]
   },
   {
+    "name": ["election"],
+    "title": ["Australian Election Greens Vote Share"],
+    "image": ["election.png"]
+  },
+  {
     "name": ["forest_plot"],
     "title": ["Forest Plot"],
     "image": ["forest_plot.png"]
