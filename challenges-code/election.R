@@ -7,7 +7,6 @@
 library(ggplot2)
 library(forcats)
 library(ozmaps)
-library(rmapshaper)
 library(ggbeeswarm)
 library(patchwork)
 library(dplyr)
