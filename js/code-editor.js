@@ -61,6 +61,12 @@ document.addEventListener('editor-ready', async () => {
         document.querySelector('#target-colours').innerHTML = "Colours: " + marked.parseInline(options["colours"]);
         document.querySelector('#target-colours').style.visibility = 'visible';
       }
+      
+      if ("stub" in options) {
+        editor.setValue(options["stub"].replace(/\\n/g, "\n"));
+      } else {
+        editor.setValue(options["dataset-name"] + " |>\n  ggplot()");
+      }
 
       console.log("Finished init.");
 
