@@ -8,11 +8,12 @@ library(dplyr)
 library(sf)
 library(ozmaps)
 
-aus_map <- ozmaps::ozmap_data("states") |> filter(NAME != "Tasmania")
+aus_map <- ozmaps::ozmap_data("states")
+aus_map$NAME <- as.factor(aus_map$NAME)
 
-p <- ggplot(aus_map) + geom_sf(aes(fill = NAME)) + 
+p <- ggplot(aus_map) + geom_sf(aes(fill = NAME), data = aus_map |> filter(NAME != "Tasmania")) + 
     theme_void() +
-    scale_fill_viridis_d() +
+    scale_fill_viridis_d(drop = FALSE) +
     labs(fill = "State")
 
 print(p)
