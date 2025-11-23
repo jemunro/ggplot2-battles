@@ -79,12 +79,14 @@ document.addEventListener('editor-ready', async () => {
         canvas.style.display = 'block';
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = background_fill;
+        ctx.imageSmoothingEnabled = false;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         canvas.getContext("2d").drawImage(img, 0, 0);
 
         const canvas_target = document.getElementById("canvas-target");
         const ctx_target = canvas_target.getContext('2d');
         ctx_target.fillStyle = background_fill;
+        ctx_target.imageSmoothingEnabled = false;
         ctx_target.fillRect(0, 0, canvas_target.width, canvas_target.height); // Fix: use canvas_target.width
         canvas_target.style.display = 'block';
         canvas_target.getContext("2d").drawImage(img, 0, 0);
@@ -159,34 +161,6 @@ function drawDefaultImage(canvas) {
 function startWebROutputLoop() {
   // Handle webR output messages in an async loop
   (async () => {
-    for (; ;) {
-      const output = await webR.read();
-      switch (output.type) {
-        case 'canvas':
-          let canvas = document.getElementById('canvas');
-          graphicsReceived = true;
-
-          if (output.data.event === 'canvasNewPage') {
-            canvas.style.display = 'block';
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = background_fill;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            plotSequenceStarted = true;
-          }
-          if (output.data.event === 'canvasImage') {
-            if (!plotSequenceStarted) {
-              const ctx = canvas.getContext('2d');
-              ctx.fillStyle = background_fill;
-              ctx.fillRect(0, 0, canvas.width, canvas.height);
-              plotSequenceStarted = true;
-            }
-            canvas.getContext('2d').drawImage(output.data.image, 0, 0);
-          }
-          break;
-        default:
-          break;
-      }
-    }
   })();
 }
 
@@ -201,7 +175,10 @@ async function runR() {
   const result = await shelter.captureR(code, {
     withAutoprint: true,
     captureStreams: true,
-    captureGraphics: false,
+    captureGraphics: {
+          width: 350,
+          height: 200
+        },
     captureConditions: false
   });
   try {
@@ -209,6 +186,18 @@ async function runR() {
       evt => evt.type == 'stdout' || evt.type == 'stderr'
     ).map((evt) => evt.data);
     document.getElementById('out').innerText = out.join('\n');
+    if (result.images.length > 0) {
+        console.log("Drawing captured image.");
+        const img = result.images[0];
+        const canvas_target = document.getElementById("canvas");
+        const ctx_target = canvas_target.getContext('2d');
+        ctx_target.fillStyle = background_fill;
+        ctx_target.imageSmoothingEnabled = false;
+        ctx_target.fillRect(0, 0, canvas_target.width, canvas_target.height); // Fix: use canvas_target.width
+        canvas_target.style.display = 'block';
+        canvas_target.getContext("2d").drawImage(img, 0, 0);
+        graphicsReceived = true;
+    }
   } finally {
     shelter.purge();
 

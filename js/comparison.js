@@ -128,7 +128,9 @@ function handleRunButtonClick() {
   offCanvas1.height = offCanvas2.height = height;
 
   const ctx1 = offCanvas1.getContext('2d');
+  ctx1.imageSmoothingEnabled = false;
   const ctx2 = offCanvas2.getContext('2d');
+  ctx2.imageSmoothingEnabled = false;
 
   try {
     ctx1.drawImage(baseImage, 0, 0, width, height);

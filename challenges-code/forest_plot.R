@@ -38,7 +38,7 @@ p <-
   scale_color_viridis_c(end = 0.9, breaks = seq(0, 10, by = 2.5)) +
   geom_hline(yintercept = 0, lty = 2, alpha = 0.5) +
   geom_point(shape = 15) +
-  geom_linerange(aes( ymin= conf.low, ymax = conf.high)) +
+  geom_segment(aes(xend = treatment, y = conf.low, yend = conf.high)) +
   coord_flip() +
   labs(
     y = 'Log hazard ratio',

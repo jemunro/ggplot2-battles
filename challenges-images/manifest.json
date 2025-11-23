@@ -20,6 +20,11 @@
     "image": ["circle_plot.png"]
   },
   {
+    "name": ["forest_plot"],
+    "title": ["Forest Plot"],
+    "image": ["forest_plot.png"]
+  },
+  {
     "name": ["ggmarginal"],
     "title": ["Marginal Distributions"],
     "image": ["ggmarginal.png"]
