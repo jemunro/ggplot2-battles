@@ -5,6 +5,8 @@ var graphicsReceived = false;
 var plotSequenceStarted = false;
 var prerun_code;
 
+var background_fill = 'rgba(255,255,255,1)'
+
 document.addEventListener('editor-ready', async () => {
   const editorElement = document.getElementById('editor');
   if (!editorElement) return;
@@ -76,13 +78,13 @@ document.addEventListener('editor-ready', async () => {
         const canvas = document.getElementById("canvas-base");
         canvas.style.display = 'block';
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'rgba(44,47,51,1)';
+        ctx.fillStyle = background_fill;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         canvas.getContext("2d").drawImage(img, 0, 0);
 
         const canvas_target = document.getElementById("canvas-target");
         const ctx_target = canvas_target.getContext('2d');
-        ctx_target.fillStyle = 'rgba(44,47,51,1)';
+        ctx_target.fillStyle = background_fill;
         ctx_target.fillRect(0, 0, canvas_target.width, canvas_target.height); // Fix: use canvas_target.width
         canvas_target.style.display = 'block';
         canvas_target.getContext("2d").drawImage(img, 0, 0);
@@ -147,7 +149,7 @@ function extractHashpipe(rCode) {
 
 function drawDefaultImage(canvas) {
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = 'rgba(44,47,51,1)';
+  ctx.fillStyle = background_fill;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   //ctx.fillStyle = 'white';
   ctx.font = '40px sans-serif';
@@ -167,14 +169,14 @@ function startWebROutputLoop() {
           if (output.data.event === 'canvasNewPage') {
             canvas.style.display = 'block';
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = 'rgba(44,47,51,1)';
+            ctx.fillStyle = background_fill;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             plotSequenceStarted = true;
           }
           if (output.data.event === 'canvasImage') {
             if (!plotSequenceStarted) {
               const ctx = canvas.getContext('2d');
-              ctx.fillStyle = 'rgba(44,47,51,1)';
+              ctx.fillStyle = background_fill;
               ctx.fillRect(0, 0, canvas.width, canvas.height);
               plotSequenceStarted = true;
             }

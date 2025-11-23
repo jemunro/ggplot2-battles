@@ -1,5 +1,10 @@
 [
   {
+    "name": ["australia"],
+    "title": ["Mapping Australia"],
+    "image": ["australia.png"]
+  },
+  {
     "name": ["basic_penguins_2"],
     "title": ["Penguin Distributions"],
     "image": ["basic_penguins_2.png"]
