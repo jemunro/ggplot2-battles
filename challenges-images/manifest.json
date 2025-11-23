@@ -35,6 +35,11 @@
     "image": ["ggmarginal.png"]
   },
   {
+    "name": ["pedestrian_uncertainty"],
+    "title": ["Uncertainty over time"],
+    "image": ["pedestrian_uncertainty.png"]
+  },
+  {
     "name": ["sir_model"],
     "title": ["SIR Model"],
     "image": ["sir_model.png"]
